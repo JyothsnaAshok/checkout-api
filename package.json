@@ -1,0 +1,12 @@
+{
+  "name": "checkout-api",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure-code demo release candidate analysed by Release Guardian.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "verify-rollback": "node scripts/verify-rollback.mjs"
+  }
+}

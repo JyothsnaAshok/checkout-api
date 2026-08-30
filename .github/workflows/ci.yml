@@ -1,0 +1,20 @@
+name: ci
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: unit tests
+        run: npm test
+      - name: forward-upgrade check (new build reads its own state)
+        run: |
+          node -e "import('./src/state.mjs').then(m => { m.writeState('.ci.jsonl', [{id:1,total_cents:1}]); console.log(m.readState('.ci.jsonl')); })"
